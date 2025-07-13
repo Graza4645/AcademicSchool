@@ -48,8 +48,9 @@
 }
 
 .table-container {
-  height: 100vh;
-  overflow: auto;
+  height: 100%;
+
+  /* overflow: auto; */
   margin : 4px;
 }
 
@@ -89,11 +90,11 @@ th:last-child {
 }
 
 .createbutton{
-       margin: 6px;
-    font-size: 11px;
+     font-size: 11px;
     display: flex;
     justify-content: space-between;
-    height: 26px;
+    height: 36px;
+    align-items: center;
 
     
 }
@@ -114,8 +115,6 @@ button{
     gap: 7px;
     justify-content: flex-start;
     align-items: center;
-   
-    margin-left: 713px;
 }
 
 
@@ -156,3 +155,135 @@ button{
   visibility: visible;
 }
 
+
+
+
+.create{
+  /* border: 1px solid red; */
+  height: 26px;
+}
+
+.leftvistor{
+margin-left: 6px;
+}
+
+
+.rightvisitor{
+margin-right: 6px;
+}
+
+
+
+@media print {
+  body * {
+    visibility: hidden;
+  }
+
+  #printArea, #printArea * {
+    visibility: visible;
+  }
+
+  #printArea {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+  }
+}
+
+
+
+
+
+.action-menu {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.action-menu i {
+  font-size: 16px;
+  padding: 5px;
+  color: #333;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  right: 0;
+  background-color: #fff;
+  min-width: 73px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  z-index: 10;
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid #ddd;
+}
+
+.dropdown-content div {
+     cursor: pointer;
+    font-size: small;
+    white-space: nowrap;
+}
+
+.dropdown-content div:hover {
+  background-color: #a3a3a2;
+}
+
+
+  .Delete:hover {
+  background-color: rgb(255, 80, 80) !important;
+  color: white;
+}
+
+/* Show dropdown when hovering on icon */
+.action-menu:hover .dropdown-content {
+  display: block;
+}
+
+
+
+/* .tablemain{
+  border: 1px solid red;
+} */
+
+
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 20px;
+}
+
+.pagination button {
+    padding:0px 7px 2px 3px;
+    border: 1px solid #ccc;
+    background: #878787;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 4%;
+    font-size: 11px;
+    height: 19px;
+}
+
+.pagination button.active {
+  background: #007bff;
+  color: white;
+  font-weight: bold;
+}
+
+.pagination button:disabled {
+  background: #e0e0e0;
+  color: #999;
+  cursor: not-allowed;
+}
+
+
+.count{
+   font-size: small;
+}
+
+.Delete :hover{
+    background-color: rgb(248, 48, 48) !important;
+}
