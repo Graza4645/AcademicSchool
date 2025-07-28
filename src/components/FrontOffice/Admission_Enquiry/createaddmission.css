@@ -1,0 +1,66 @@
+.admission-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 15px;
+  background: #fff;
+  box-shadow: 0 0 5px #ccc;
+  border-radius: 6px;
+  font-family: Arial, sans-serif;
+}
+
+.admission-title {
+  margin-bottom: 15px;
+  font-size: 20px;
+}
+
+.admission-form-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+}
+
+.admission-form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.admission-label {
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+
+.admission-required {
+  color: red;
+}
+
+.admission-input,
+.admission-select {
+  padding: 8px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  height: 40px;
+  width: 100%;
+  box-sizing: border-box;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+.admission-form-actions {
+  text-align: right;
+  margin-top: 20px;
+}
+
+.admission-save-btn {
+  background-color: #7a6ee6;
+  color: #fff;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.admission-save-btn:hover {
+  background-color: #6a5dd6;
+}

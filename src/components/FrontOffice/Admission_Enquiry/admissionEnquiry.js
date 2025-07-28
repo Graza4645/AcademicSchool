@@ -383,8 +383,10 @@ import React, { useState, useEffect } from "react";
 import "./AdmissionEnquiry.css";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { useNavigate } from "react-router-dom";
 
 const AdmissionEnquiry = () => {
+    const navigate = useNavigate();
   const [classes, setClasses] = useState([]);
   const [sources, setSources] = useState([]);
   const [statuses, setStatuses] = useState([]);
@@ -487,7 +489,7 @@ const AdmissionEnquiry = () => {
             onChange={(e) => setSearchQuery(e.target.value)}
             className="search-input"
           />
-          <button className="add-btn">+ Add</button>
+          <button className="add-btn"   onClick={() => navigate("/createaddmission")}>create +</button>
         </div>
         <table className="enquiry-table">
           <thead>
