@@ -1,57 +1,249 @@
-.enquiry-wrapper {
-  padding: 20px;
-  font-family: Arial, sans-serif;
-  background-color: #f8f9fa;
+/* .admission-enquiry-container {
+  background-color: #f9fafb;
+  padding: 1rem;
 }
 
-.title {
-  font-size: 24px;
-  margin-bottom: 20px;
+.criteria-card {
+  background-color: #ffffff;
 }
 
-.filter-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  align-items: flex-end;
-  background-color: #fff;
-  padding: 15px;
-  border-radius: 8px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+.criteria-title {
+  font-weight: 600;
 }
 
-.filter-item {
-  flex: 1 1 200px;
-  display: flex;
-  flex-direction: column;
+.criteria-grid {
+  margin-bottom: 1rem;
 }
 
-.filter-item label {
-  font-weight: 500;
-  margin-bottom: 5px;
+.field-group {
+  padding: 4px;
 }
 
-.filter-item input,
-.filter-item select {
-  padding: 6px 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+.dropdown-select .mantine-Select-input {
+  background-color: #f0f8ff;
+}
+
+.date-input .mantine-DateInput-input {
+  background-color: #f0f8ff;
+}
+
+.action-buttons {
+  margin-top: 10px;
 }
 
 .search-button {
-  flex: 0 0 auto;
+  margin-top: 10px;
 }
 
-.search-button button {
-  padding: 8px 16px;
+.table-card {
+  background-color: #ffffff;
+}
+
+.table-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.add-button {
+  font-size: 12px;
+  padding: 2px 8px;
+}
+
+.table-search input {
+  background-color: #f0f0f0;
+}
+
+.enquiry-table thead {
+  background-color: #0056b3;
+  color: white;
+}
+
+.enquiry-table td {
+  text-align: center;
+}
+
+.no-data-group {
+  flex-direction: column;
+  align-items: center;
+}
+
+.no-data-image {
+  margin-bottom: 10px;
+}
+
+#add-link {
+  font-style: italic;
+} */
+
+
+
+/* 
+#admission-enquiry {
+  padding-top: 20px;
+}
+
+.criteria-card,
+.table-card {
+  background-color: #fff;
+}
+
+.criteria-title {
+  font-weight: 600;
+}
+
+.criteria-grid .field-group {
+  padding: 5px;
+}
+
+.dropdown-select,
+.date-input {
+  width: 100%;
+}
+
+#search-button,
+#add-button {
+  font-weight: 500;
+}
+
+#enquiry-table th {
+  text-align: center;
+}
+
+#enquiry-table td {
+  text-align: center;
+  font-size: 14px;
+}
+
+.no-data-group {
+  flex-direction: column;
+  align-items: center;
+}
+
+.no-data-image {
+  opacity: 0.5;
+}
+
+#no-data-text {
+  font-size: 16px;
+}
+
+#add-link {
+  cursor: pointer;
+} */
+
+
+
+
+.admission-enquiry-wrapper {
+  padding: 20px;
+  background: #f9f9f9;
+}
+
+.filter-section {
+  background: #fff;
+  border-radius: 6px;
+  padding: 20px;
+  box-shadow: 0 0 4px #ccc;
+  margin-bottom: 20px;
+}
+
+.form-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  align-items: flex-end;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 180px;
+}
+
+.form-group label {
+  font-weight: bold;
+  margin-bottom: 6px;
+}
+
+.form-group span {
+  color: red;
+}
+
+.date-picker {
+  padding: 6px;
+  font-size: 14px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+.search-btn {
   background-color: #007bff;
   color: white;
-  font-weight: 500;
+  padding: 8px 14px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
 }
 
-.search-button button:hover {
-  background-color: #0056b3;
+.table-section {
+  background: #fff;
+  border-radius: 6px;
+  padding: 20px;
+  box-shadow: 0 0 4px #ccc;
+}
+
+.table-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.search-input {
+  border: 1px solid #ccc;
+  padding: 6px;
+  border-radius: 4px;
+  width: 200px;
+}
+
+.add-btn {
+  background-color: #28a745;
+  color: white;
+  padding: 6px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.enquiry-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+.enquiry-table th, .enquiry-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+  font-size: 14px;
+}
+
+.enquiry-table th {
+  background-color: #003366;
+  color: white;
+}
+
+.no-data {
+  text-align: center;
+  padding: 40px 20px;
+  color: #555;
+}
+
+.no-data-img {
+  width: 60px;
+  height: 60px;
+  margin: 0 auto 10px;
+  background: url('https://cdn-icons-png.flaticon.com/512/7486/7486044.png') no-repeat center/contain;
 }
