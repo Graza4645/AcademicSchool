@@ -379,7 +379,7 @@
 
 
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./AdmissionEnquiry.css";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -387,10 +387,6 @@ import { useNavigate } from "react-router-dom";
 
 const AdmissionEnquiry = () => {
     const navigate = useNavigate();
-  const [classes, setClasses] = useState([]);
-  const [sources, setSources] = useState([]);
-  const [statuses, setStatuses] = useState([]);
-
   const [formData, setFormData] = useState({
     class: "",
     source: "",
@@ -399,24 +395,27 @@ const AdmissionEnquiry = () => {
     status: "",
   });
 
-  const [searchQuery, setSearchQuery] = useState("");
+/**  Starting */
+   const formElements = 
+   [
+  
+  { id : 'Std', label : 'Class',type: "dropdown", options: ["Nursery", "LKG", "UKG", "Class 1", "Class 2", "Class 3", "Class 4", "Class 5", "Class 6", "Class 7", "Class 8", "Class 9", "Class 10", "Class 11 - Science", "Class 11 - Commerce", "Class 11 - Arts", "Class 12 - Science", "Class 12 - Commerce", "Class 12 - Arts", "B.A.", "B.Sc.", "B.Com.", "B.Tech", "BBA", "BCA", "M.A.", "M.Sc.", "M.Com.", "M.Tech", "MBA", "MCA"], require: true,},
+  {id: "Source",label: "Source",type: "dropdown",require: true,options: ["Advertisement", "Online Front Site", "Google Ads", "Admission Campaign", "Front Office", "parents", "Student"]},
+  { id: "date", label: "Enquiry From Date", type: "date", position: "left", require: true },
+  { id: "date", label: "Enquiry To Date", type: "date", position: "left", require: true },
+  { id: "status", label: "Status", type: "dropdown", options: ["All", "Active", "Passive", "Dead", "Won", "Lost"],position: "left", require: true },
 
-  // Fetch dropdown data dynamically
-  useEffect(() => {
-    // TODO: Replace with actual API calls
-    setClasses(["Class 1", "Class 2", "Class 3"]);
-    setSources(["Advertisement", "Website", "Walk-in"]);
-    setStatuses(["Open", "Closed", "Pending"]);
-  }, []);
+]
+
+
+  const [searchQuery, setSearchQuery] = useState("");
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleDateChange = (name, date) => {
-    setFormData(prev => ({ ...prev, [name]: date }));
-  };
+ 
 
   const handleSearch = () => {
     console.log("Search triggered with:", formData);
@@ -428,63 +427,90 @@ const AdmissionEnquiry = () => {
       <div className="filter-section">
         <h3>Select Criteria</h3>
         <div className="form-row">
+         
+
+{formElements.map((item) => {
+  const value = formData[item.id] || "";
+
+  if (item.id === "Std" || item.id === "Source" || item.id === "status") {
+    return (
+      <div key={item.id} className="form-group">
+        <label htmlFor={item.id}>
+          {item.label}
+          {item.require && <span className="required">*</span>}
+        </label>
+        <select
+          id={item.id}
+          name={item.id}
+          value={value}
+          onChange={handleChange}
+        >
+          <option value="">Select {item.label}</option>
+          {item.options.map((option, idx) => (
+            <option key={idx} value={option}>
+              {option}
+            </option>
+          ))}
+        </select>
+      </div>
+    );
+  }
+
+
+if (item.type === "date") {
+  const today = new Date();
+  const oneYearBack = new Date(today);
+  oneYearBack.setFullYear(today.getFullYear() - 1);
+
+  const oneYearAhead = new Date(today);
+  oneYearAhead.setFullYear(today.getFullYear() + 1);
+
+  // 📌 Formatter to 15-Aug-2025
+  const formatDate = (date) => {
+    const day = String(date.getDate()).padStart(2, "0");
+    const month = date.toLocaleString("en-US", { month: "short" });
+    const year = date.getFullYear();
+    return `${day}-${month}-${year}`;
+  };
+
+  return (
+    <div key={item.id} className="form-group">
+      <label htmlFor={item.id}>
+        {item.label}
+        {item.require && <span className="required">*</span>}
+      </label>
+      <DatePicker
+        id={item.id}
+        selected={formData[item.id] ? new Date(formData[item.id]) : null}
+        onChange={(date) => {
+          const formatted = formatDate(date);
+          handleChange(item.id, formatted);
+        }}
+        minDate={oneYearBack}
+        maxDate={oneYearAhead}
+        placeholderText="Pick a date"
+        dateFormat="dd-MMM-yyyy"
+        className="text-input"
+      />
+    </div>
+  );
+}
+
+
+return null;
+})}
           <div className="form-group">
-            <label>Class</label>
-            <select name="class" id="classDropdown" value={formData.class} onChange={handleChange}>
-              <option value="">Select Class</option>
-              {classes.map((cls, i) => (
-                <option key={i} value={cls}>{cls}</option>
-              ))}
-            </select>
-          </div>
-          <div className="form-group">
-            <label>Source</label>
-            <select name="source" id="sourceDropdown" value={formData.source} onChange={handleChange}>
-              <option value="">Select Source</option>
-              {sources.map((src, i) => (
-                <option key={i} value={src}>{src}</option>
-              ))}
-            </select>
-          </div>
-          <div className="form-group">
-            <label>Enquiry From Date<span>*</span></label>
-            <DatePicker
-              selected={formData.fromDate}
-              onChange={(date) => handleDateChange("fromDate", date)}
-              dateFormat="dd-MM-yyyy"
-              className="date-picker"
-            />
-          </div>
-          <div className="form-group">
-            <label>Enquiry To Date<span>*</span></label>
-            <DatePicker
-              selected={formData.toDate}
-              onChange={(date) => handleDateChange("toDate", date)}
-              dateFormat="dd-MM-yyyy"
-              className="date-picker"
-            />
-          </div>
-          <div className="form-group">
-            <label>Status</label>
-            <select name="status" id="statusDropdown" value={formData.status} onChange={handleChange}>
-              <option value="">Select</option>
-              {statuses.map((sts, i) => (
-                <option key={i} value={sts}>{sts}</option>
-              ))}
-            </select>
-          </div>
-          <div className="form-group">
-            <button onClick={handleSearch} className="search-btn">🔍 Search</button>
+            <button onClick={handleSearch} className="search-btn">Search</button>
           </div>
         </div>
       </div>
 
       <div className="table-section">
         <div className="table-header">
-          <h3>Admission Enquiry</h3>
+          <h4>Admission Enquiry</h4>
           <input
             type="text"
-            placeholder="🔎 Search..."
+            placeholder="Search..."            //🔎 
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className="search-input"
@@ -494,13 +520,13 @@ const AdmissionEnquiry = () => {
         <table className="enquiry-table">
           <thead>
             <tr>
-              <th>NAME ⬍</th>
-              <th>PHONE ⬍</th>
-              <th>SOURCE ⬍</th>
-              <th>ENQUIRY DATE ⬍</th>
-              <th>LAST FOLLOW UP DATE ⬍</th>
-              <th>NEXT FOLLOW UP DATE ⬍</th>
-              <th>STATUS ⬍</th>
+              <th>NAME</th>
+              <th>PHONE</th>
+              <th>SOURCE</th>
+              <th>ENQUIRY DATE</th>
+              <th>LAST FOLLOW UP DATE</th>
+              <th>NEXT FOLLOW UP DATE</th>
+              <th>STATUS</th>
               <th>ACTION</th>
             </tr>
           </thead>
