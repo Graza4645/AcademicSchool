@@ -10,10 +10,6 @@ export default function VisitorBook() {
   const [visitors, setVisitors] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
 
-  const [selectedVisitor, setSelectedVisitor] = useState(null);
-const [showModal, setShowModal] = useState(false);
-
-
   const visitorsPerPage = 20;
 
   useEffect(() => {
@@ -27,7 +23,6 @@ const [showModal, setShowModal] = useState(false);
         const staffData = await staffRes.json();
         const allVisitors = [...(studentData || []), ...(staffData || [])];
         setVisitors(allVisitors);
-        
       } catch (error) {
         console.error("Error fetching visitor data:", error);
       }
@@ -35,16 +30,6 @@ const [showModal, setShowModal] = useState(false);
 
     fetchVisitors();
   }, []);
-
-
-
-  const handleView = (visitor) => {
-  setSelectedVisitor(visitor);
-  setShowModal(true);
-};
-
-
-
 
   const handleDelete = async (visitor) => {
     const name = visitor.visitor_name || visitor.staff || visitor.student;
@@ -84,31 +69,6 @@ const [showModal, setShowModal] = useState(false);
       alert("Error deleting visitor");
     }
   };
-
-
-  const handleCopy = () => {
-  const exportData = normalizeData(visitors); // Already defined and used for Excel/CSV
-
-  if (!exportData.length) {
-    alert("No data to copy");
-    return;
-  }
-
-  // Create a tab-separated string (or you can use commas for CSV)
-  const headers = Object.keys(exportData[0]).join("\t");
-  const rows = exportData.map(row => Object.values(row).join("\t"));
-  const tsvContent = [headers, ...rows].join("\n");
-
-  // Use Clipboard API to copy
-  navigator.clipboard.writeText(tsvContent)
-    .then(() => {
-      alert("Visitor data copied to clipboard!");
-    })
-    .catch(err => {
-      console.error("Failed to copy:", err);
-      alert("Failed to copy visitor data.");
-    });
-};
 
   const handleEdit = async (visitor) => {
     const updatedName = prompt(
@@ -212,10 +172,10 @@ const [showModal, setShowModal] = useState(false);
         <div className="leftvistor">Front Office → Visitor Book</div>
         <div className="rightvisitor">
           <div className="icon-toolbar">
-           <span className="icon-container" onClick={handleCopy} title="Copy to Clipboard">
-  <i className="fas fa-copy"></i>
-  <span className="tooltip">Copy</span>
-</span>
+            <span className="icon-container" title="Copy (Coming Soon)">
+              <i className="fas fa-copy"></i>
+              <span className="tooltip">Copy</span>
+            </span>
             <span
               className="icon-container"
               onClick={() => handleExport("excel")}
@@ -298,11 +258,19 @@ const [showModal, setShowModal] = useState(false);
                     <div className="action-menu">
                       <i className="fas fa-ellipsis-v"></i>
                       <div className="dropdown-content">
-  <div className="view" onClick={() => handleView(visitor)}>View</div>
-  <div className="edit" onClick={() => handleEdit(visitor)}>Edit</div>
-  <div className="Delete" onClick={() => handleDelete(visitor)}>Delete</div>
-</div>
-
+                        <div
+                          className="edit"
+                          onClick={() => handleEdit(visitor)}
+                        >
+                          Edit
+                        </div>
+                        <div
+                          className="Delete"
+                          onClick={() => handleDelete(visitor)}
+                        >
+                          Delete
+                        </div>
+                      </div>
                     </div>
                   </td>
                 </tr>
@@ -315,26 +283,6 @@ const [showModal, setShowModal] = useState(false);
             </tbody>
           </table>
         </div>
-
-
-{showModal && selectedVisitor && (
-  <div className="modal-overlay">
-    <div className="modal">
-      <div className="modal-header">
-        <h3>Visitor Details</h3>
-        <span className="close-button" onClick={() => setShowModal(false)}>&times;</span>
-      </div>
-      <div className="modal-body">
-        {Object.entries(normalizeData([selectedVisitor])[0]).map(([key, value]) => (
-          <p key={key}><strong>{key}:</strong> {value}</p>
-        ))}
-      </div>
-    </div>
-  </div>
-)}
-
-
-
       </main>
       {/* <div className='lower'> */}
       {/* <div className='count'></div> */}
